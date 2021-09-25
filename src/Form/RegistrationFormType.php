@@ -56,6 +56,7 @@ class RegistrationFormType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Register'
             ])
+
             ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
                 /** @var User $user */
                 $user = $event->getData();
