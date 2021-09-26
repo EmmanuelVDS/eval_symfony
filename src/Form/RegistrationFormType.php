@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -12,7 +13,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RegistrationFormType extends AbstractType
@@ -27,8 +27,22 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
+            ->add('firstname',TextType::class,[
+                'label' => 'Prénom',
+                'constraints'=>[
+                    new NotBlank()
+                ]
+            ] )
+            ->add('lastname',TextType::class,[
+                'label' => 'Nom',
+                'constraints'=>[
+                    new NotBlank()
+                ]
+            ] )
+
             ->add('email', TextType::class, [
-                'label' => 'Email',
+                'label' => 'Adresse e-mail',
                 'constraints' => [
                     new NotBlank()
                 ]
@@ -41,20 +55,13 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
 
-            ->add('firstname',TextType::class,[
-                'label' => 'Firstname',
-                'constraints'=>[
-                    new NotBlank()
-                ]
-            ] )
-            ->add('lastname',TextType::class,[
-                'label' => 'Lastname',
-                'constraints'=>[
-                    new NotBlank()
-                ]
-            ] )
+            ->add('conditions', CheckboxType::class, [
+                'label' => 'J\'accepte les CGU',
+                'required' => false,
+            ])
+
             ->add('submit', SubmitType::class, [
-                'label' => 'Register'
+                'label' => 'Créer mon compte'
             ])
 
             ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {

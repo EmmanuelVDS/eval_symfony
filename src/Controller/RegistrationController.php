@@ -25,7 +25,7 @@ class RegistrationController extends AbstractController
             // le mot de passe est automatiquement hashé
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('app_welcome');
         }
 
         return $this->render('registration/register.html.twig', [

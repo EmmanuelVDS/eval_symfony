@@ -8,10 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class WelcomeAction extends AbstractController
+class WelcomeActionController extends AbstractController
 {
-    #[Route('/welcome', name: 'welcome')]
-    public function dashboard(ProductRepository $productRepository, UserRepository $userRepository): Response
+    #[Route('/', name: 'app_welcome')]
+    public function dashboard(): Response
 
     {
         return $this->render('user/welcome.html.twig');
