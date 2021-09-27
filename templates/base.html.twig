@@ -20,6 +20,9 @@
     {% endblock %}
 </head>
 <body>
+{% if app.user %}
+    {{ include('parts/head.html.twig') }}
+{% endif %}
 {% block body %}
     {% include 'parts/head.html.twig' %}
 {% endblock %}

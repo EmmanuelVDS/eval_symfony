@@ -47,4 +47,12 @@ class ProductController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+    #[Route('/products', name: 'app_product')]
+    public function listProducts(ProductRepository $productRepository)
+    {
+        $products = $productRepository->findAll();
+        return $this->render('product/products.html.twig', [
+            'products' => $products,
+        ]);
+    }
 }

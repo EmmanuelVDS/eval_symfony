@@ -21,6 +21,9 @@ class AddProductFormType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom du produit',
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ],
                 'constraints' => [
                     new NotBlank()
                 ]
@@ -28,6 +31,9 @@ class AddProductFormType extends AbstractType
 
             ->add('Description', TextType::class, [
                 'label' => 'Description',
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ],
                 'constraints' => [
                     new NotBlank()
                 ]
@@ -35,6 +41,9 @@ class AddProductFormType extends AbstractType
 
             ->add('price', NumberType::class, [
                 'label' => 'Prix',
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ],
                 'constraints' => [
                     new NotBlank(),
                     new NotNull(),
@@ -44,6 +53,9 @@ class AddProductFormType extends AbstractType
 
             ->add('image', TextType::class, [
                 'label' => 'Fichier image',
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ],
                 'constraints' => [
                     new NotBlank()
                 ]
@@ -55,7 +67,10 @@ class AddProductFormType extends AbstractType
             ])
 
             ->add('submit', SubmitType::class, [
-                'label' => 'Ajouter un produit'
+                'label' => 'Ajouter un produit',
+                'attr' => [
+                    'class' => 'btn btn-lg btn-primary mt-5'
+                ],
             ])
         ;
     }
