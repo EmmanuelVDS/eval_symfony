@@ -27,43 +27,52 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
-            ->add('firstname',TextType::class,[
+            ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
-                'constraints'=>[
-                    new NotBlank()
-                ]
-            ] )
-            ->add('lastname',TextType::class,[
-                'label' => 'Nom',
-                'constraints'=>[
-                    new NotBlank()
-                ]
-            ] )
-
-            ->add('email', TextType::class, [
-                'label' => 'Adresse e-mail',
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ],
                 'constraints' => [
                     new NotBlank()
                 ]
             ])
-
-            ->add('password',PasswordType::class,[
-                'label' => 'Mot de passe',
-                'constraints'=>[
+            ->add('lastname', TextType::class, [
+                'label' => 'Nom',
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ],
+                'constraints' => [
                     new NotBlank()
                 ]
             ])
-
+            ->add('email', TextType::class, [
+                'label' => 'Adresse e-mail',
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ],
+                'constraints' => [
+                    new NotBlank()
+                ]
+            ])
+            ->add('password', PasswordType::class, [
+                'label' => 'Mot de passe',
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ],
+                'constraints' => [
+                    new NotBlank()
+                ]
+            ])
             ->add('conditions', CheckboxType::class, [
                 'label' => 'J\'accepte les CGU',
                 'required' => false,
             ])
-
             ->add('submit', SubmitType::class, [
-                'label' => 'Créer mon compte'
+                'label' => 'Créer mon compte',
+                'attr' => [
+                    'class' => 'btn btn-lg btn-primary mt-5'
+                ],
             ])
-
             ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
                 /** @var User $user */
                 $user = $event->getData();
