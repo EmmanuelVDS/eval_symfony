@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class WelcomeActionController extends AbstractController
 {
-    #[Route('/', name: 'app_welcome')]
+    #[Route('/security/welcome', name: 'app_welcome')]
     public function dashboard(): Response
 
     {

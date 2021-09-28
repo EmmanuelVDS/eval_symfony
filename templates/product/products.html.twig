@@ -1,14 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{% block products %}
     <div class="container">
-        <h3>Parcourir</h3>
+        <h1 class="h3 mb-3 mt-5">Parcourir</h1>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for product in products %}
                 <div class="col">
                     <div class="card">
-                        <img src="{{ product.image }}" class="card-img-top" alt="Image of {{ product.name }}">
+                        {% if product.image is not null %}
+                            <img src="{{ asset('uploads/'~product.image) }}"
+                                 alt="Image of the article {{ product.name }}" class="card-img-top" height="250px" style="object-fit: contain">
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text">{{ product.description }}</p>
@@ -20,4 +24,5 @@
         </div>
 
     </div>
+{% endblock %}
 {% endblock %}

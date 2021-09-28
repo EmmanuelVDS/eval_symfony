@@ -21,10 +21,12 @@
 </head>
 <body>
 {% if app.user %}
-    {{ include('parts/head.html.twig') }}
+    {{ include('parts/headIfUser.html.twig') }}
+{% elseif block("welcome") is defined or block("products") is defined %}
+    {{ include('parts/headNoUser.html.twig') }}
 {% endif %}
 {% block body %}
-    {% include 'parts/head.html.twig' %}
+    {% include 'parts/headIfUser.html.twig' %}
 {% endblock %}
 </body>
 </html>

@@ -3,7 +3,7 @@
 {% block body %}
     <div class="container">
 
-        <h1 class="mt-5">Tableau de bord</h1>
+        <h1 class="h3 mb-3 mt-5">Tableau de bord</h1>
         <div class="mt-2 mb-3">
             <a href="{{ path('add_product') }}">+ Ajouter un produit</a>
         </div>
@@ -23,17 +23,24 @@
 
                 <tr class="align-middle">
                     <td>{{ product.name }}</td>
-                    <td class="text-center"><img src="{{ product.image }}" alt="Image of the article {{ product.name }}" width="100px"></td>
+                    <td class="text-center">
+                        {% if product.image is not null %}
+                            <img src="{{ asset('uploads/'~product.image) }}"
+                                 alt="Image of the article {{ product.name }}" width="100px">
+                        {% endif %}
+                    </td>
                     <td>{{ product.price }}€</td>
                     <td>{{ product.dateAdded|date("d/m/Y") }}</td>
                     <td class="text-center">
                         {% if not product.isActive %}
                             <button class="btn btn-sm btn-success">
-                                Ajouter à la vente
+                                <a href="{{ path('is-active', {'id': product.id}) }}"
+                                   class="text-white text-decoration-none">Ajouter à la vente</a>
                             </button>
                         {% elseif product.isActive %}
                             <button class="btn btn-sm btn-danger">
-                                Retirer de la vente
+                                <a href="{{ path('is-active', {'id': product.id}) }}"
+                                   class="text-white text-decoration-none">Retirer de la vente</a>
                             </button>
                         {% endif %}
                     </td>

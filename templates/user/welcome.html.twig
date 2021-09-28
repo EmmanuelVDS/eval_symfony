@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% block welcome %}
 
-    <div class="container">
+        <div class="container">
             <div class="row">
-                <h1 class="col-md-12 my-5">Accéder à mon compte</h1>
+                <h1 class="col-md-12 my-5">Je m'inscris / Je me connecte</h1>
                 <div class="col-md-6">{{ render(url('app_login')) }}</div>
                 <div class="col-md-6">{{ render(url('app_register')) }}</div>
             </div>
-    </div>
+        </div>
+    {% endblock %}
 {% endblock %}
 
