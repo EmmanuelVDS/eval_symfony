@@ -29,6 +29,16 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllWhereIsActiveByIdUser($id)
+    {
+        return $this->createQueryBuilder('g')
+            ->where('g.isActive = 1')
+            ->andWhere('g.user = :user')
+            ->setParameter("user", $id)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */
