@@ -10,10 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class WelcomeActionController extends AbstractController
 {
-    #[Route('/security/welcome', name: 'app_welcome')]
+    #[Route('/', name: 'app_welcome')]
     public function dashboard(): Response
-
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('dashboard_user');
+        }
         return $this->render('user/welcome.html.twig');
     }
 }

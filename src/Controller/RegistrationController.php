@@ -15,6 +15,10 @@ class RegistrationController extends AbstractController
     #[Route('/security/register', name: 'app_register')]
     public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('dashboard_user');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user, [
             'action' => $this->generateUrl('app_register')
@@ -22,7 +26,6 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // le mot de passe est automatiquement hashé
             $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirectToRoute('app_welcome');

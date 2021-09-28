@@ -22,7 +22,7 @@
 <body>
 {% if app.user %}
     {{ include('parts/headIfUser.html.twig') }}
-{% elseif block("welcome") is defined or block("products") is defined %}
+{% elseif block("products") is defined %}
     {{ include('parts/headNoUser.html.twig') }}
 {% endif %}
 {% block body %}

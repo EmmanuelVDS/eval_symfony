@@ -55,7 +55,7 @@ class ProductController extends AbstractController
     #[Route('/products', name: 'app_product')]
     public function listProducts(ProductRepository $productRepository): Response
     {
-        $products = $productRepository->findAll();
+        $products = $productRepository->findAllWhereIsActive();
         return $this->render('product/products.html.twig', [
             'products' => $products,
         ]);
