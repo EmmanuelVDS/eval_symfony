@@ -3,19 +3,26 @@
 namespace App\Controller;
 
 use App\Repository\ProductRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class ApiController extends AbstractController
 {
     #[Route('/api/onsaleproducts', name: 'api_on_sale_products')]
-    public function onSaleProducts(ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
+    public function onSaleProducts(Request $request, ProductRepository $productRepository, SerializerInterface $serializer, PaginatorInterface $paginator): JsonResponse
     {
         $productsOnSale = $productRepository->findAllWhereIsActive();
 
-        $data = $serializer->serialize($productsOnSale, 'json');
+        $productsOnSalePage = $paginator->paginate(
+            $productsOnSale,
+            $request->query->getInt('page', 1),
+            20);
+
+        $data = $serializer->serialize($productsOnSalePage, 'json');
 
         return new JsonResponse($data, 200, [], true);
     }
